@@ -1,4 +1,5 @@
 # SwiftUI Expert Skill
+[![Weekly Installs](https://img.shields.io/badge/weekly%20installs-6.6k-brightgreen)](https://skills.sh/avdlee/swiftui-agent-skill/swiftui-expert-skill)
 
 Expert guidance for any AI coding tool that supports the [Agent Skills open format](https://agentskills.io/home) — SwiftUI state management, view composition, performance, and iOS 26+ Liquid Glass adoption.
 
