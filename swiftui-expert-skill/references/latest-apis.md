@@ -335,6 +335,22 @@ TextField("Code", text: $code)
     .disableAutocorrection(true)
 ```
 
+### Clipboard
+
+**Use `PasteButton` instead of `UIPasteboard` for reading clipboard content.**
+
+`PasteButton` is a system-provided button that reads clipboard content via `Transferable`. It handles permissions automatically and avoids the paste permission prompt that `UIPasteboard` triggers.
+
+```swift
+// Modern
+PasteButton(payloadType: String.self) { strings in
+    pastedText = strings.first ?? ""
+}
+
+// Avoid — triggers paste permission prompt, not SwiftUI-native
+let text = UIPasteboard.general.string
+```
+
 ---
 
 ## When Targeting iOS 17+
@@ -843,6 +859,7 @@ UIApplication.shared.activateSceneSession(
 | `NavigationView` | `NavigationStack` / `NavigationSplitView` | iOS 16+ |
 | `accentColor(_:)` | `tint(_:)` | iOS 16+ |
 | `disableAutocorrection(_:)` | `autocorrectionDisabled(_:)` | iOS 16+ |
+| `UIPasteboard.general` | `PasteButton` | iOS 16+ |
 | `onChange(of:perform:)` | `onChange(of:) { }` or `onChange(of:) { old, new in }` | iOS 17+ |
 | `MagnificationGesture` | `MagnifyGesture` | iOS 17+ |
 | `RotationGesture` | `RotateGesture` | iOS 17+ |
