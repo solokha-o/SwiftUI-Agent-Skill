@@ -471,6 +471,29 @@ GeometryReader { geometry in
 }
 ```
 
+**Use `onGeometryChange(for:of:action:)` to observe single object size and position without using `GeometryReader`**
+
+```swift
+// Size
+Text("Long large text")
+    .onGeometryChange(for: CGSize.self) { geometry in
+                return geometry.size
+            } action: { newValue in
+                //Handle size
+            }
+
+// Offset
+VStack {
+    Text("Long large text")
+        .onGeometryChange(for: CGFloat.self) { geometry in
+                    return geometry.frame(in: .named("stack")).minY
+                } action: { newValue in
+                   //Handle offset
+                }
+}
+.coordinateSpace(name: "stack")
+```
+
 **Use `coordinateSpace(_:)` with `NamedCoordinateSpace` instead of `coordinateSpace(name:)`.**
 
 ```swift
