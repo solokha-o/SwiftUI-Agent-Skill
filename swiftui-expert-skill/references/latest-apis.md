@@ -720,7 +720,7 @@ Button("Get Started") { }
 
 ```swift
 Button("Confirm") { }
-    .clipShape(.rect(cornerRadius: 12, style: .continuous))
+    .clipShape(.rect(cornerRadius: 12, style: .concentric))
 ```
 
 **Sliders now support tick marks and a neutral value.**
@@ -791,6 +791,32 @@ PhotoGrid(photos: photos)
 
 **UIKit and AppKit lifecycle apps can now request SwiftUI scenes.** This enables using SwiftUI-only scene types like `MenuBarExtra` and `ImmersiveSpace` from imperative lifecycle apps.
 
+```swift
+// In your SwiftUI App, declare the scene
+@main
+struct MyApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+
+        #if os(macOS)
+        MenuBarExtra("Quick Actions", systemImage: "star") {
+            QuickActionsView()
+        }
+        #endif
+    }
+}
+
+// From a UIKit-based app, request the SwiftUI scene
+UIApplication.shared.activateSceneSession(
+    for: .init(role: .windowApplication),
+    errorHandler: { error in
+        print("Failed to activate scene: \(error)")
+    }
+)
+```
+
 > Source: "What's new in SwiftUI" (WWDC25, session 256)
 
 ---
@@ -825,4 +851,4 @@ PhotoGrid(photos: photos)
 | `tabItem(_:)` | `Tab` API | iOS 18+ |
 | Manual `animatableData` | `@Animatable` macro | iOS 26+ |
 | `presentationBackground(_:)` on sheets | Default Liquid Glass sheet material | iOS 26+ |
-| Custom toolbar background hacks | `scrollEdgeEffectStyle` | iOS 26+ |
+| Custom toolbar background hacks | `scrollEdgeEffectStyle(_:for:)` | iOS 26+ |

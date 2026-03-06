@@ -66,7 +66,7 @@ Use this skill to build, review, or improve SwiftUI features with correct state 
 ### Performance
 - Pass only needed values to views (avoid large "config" or "context" objects)
 - Eliminate unnecessary dependencies to reduce update fan-out
-- Use per-item `@Observable` view models in lists to narrow dependency scope
+- Consider per-item `@Observable` state objects in lists to narrow update/dependency scope
 - Avoid storing frequently-changing values in the environment
 - Check for value changes before assigning state in hot paths
 - Avoid redundant state updates in `onReceive`, `onChange`, scroll handlers
@@ -179,7 +179,7 @@ Button("Confirm") { }
 - [ ] View `body` kept simple and pure (no side effects)
 - [ ] Passing only needed values (not large config objects)
 - [ ] Eliminating unnecessary dependencies
-- [ ] @Observable dependencies are granular (per-item view models for list items)
+- [ ] Consider making @Observable dependencies as granular as needed (for example, per-item data for list rows) when it helps performance
 - [ ] State updates check for value changes before assigning
 - [ ] Hot paths minimize state updates
 - [ ] No object creation in `body`

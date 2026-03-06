@@ -375,7 +375,7 @@ An automatic scroll edge effect blurs and fades content under system toolbars to
 - Match container spacing with layout spacing
 - Provide material-based fallbacks for older iOS
 - Keep glass shapes consistent within a feature
-- Remove custom `presentationBackground` on sheets to use the default glass material
+- Remove custom `presentationBackground(_:)` on sheets to use the default glass material
 
 ### Don't
 

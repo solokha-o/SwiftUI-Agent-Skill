@@ -276,7 +276,7 @@ struct ItemRow: View {
 
 ### 10. @Observable Dependency Granularity
 
-**Use per-item view models to narrow `@Observable` update scope.** When multiple list items share a dependency on the same `@Observable` array, changing one element causes all items to re-evaluate their bodies.
+**Consider per-item `@Observable` state holders (one per row/item) to narrow update scope.** When multiple list items share a dependency on the same `@Observable` array, changing one element causes all items to re-evaluate their bodies.
 
 ```swift
 // BAD - all item views depend on the full favorites array
@@ -468,6 +468,6 @@ var itemCount: Int { items.count }  // Computed property
 - [ ] Use `Self._logChanges()` or `Self._printChanges()` to debug unexpected updates
 - [ ] Equatable conformance for expensive views (when appropriate)
 - [ ] Consider POD view wrappers for advanced optimization
-- [ ] @Observable dependencies are granular (per-item view models for list items)
+- [ ] Consider using granular @Observable dependencies for list items (smaller observable units per row when it measurably reduces updates)
 - [ ] Frequently-changing values not stored in the environment
 - [ ] Sendable closures (Shape, visualEffect, Layout) capture values instead of accessing @MainActor state
