@@ -174,6 +174,7 @@ Button("Confirm") { }
 - [ ] Using modifiers instead of conditionals for state changes
 - [ ] Complex views extracted to separate subviews
 - [ ] Container views use `@ViewBuilder let content: Content`
+- [ ] `.compositingGroup()` before `.clipShape()` on layered views
 
 ### Performance (see `references/performance-patterns.md`)
 - [ ] View `body` kept simple and pure (no side effects)
