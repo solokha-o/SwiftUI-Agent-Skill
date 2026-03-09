@@ -527,13 +527,9 @@ struct ProxyDrivenChart: View {
                     .gesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged { value in
-                                let frame: CGRect
-                                if #available(iOS 17, *) {
-                                    guard let plotFrame = proxy.plotFrame else { return }
-                                    frame = geometry[plotFrame]
-                                } else {
-                                    frame = geometry[proxy.plotAreaFrame]
-                                }
+                                // Use proxy.plotFrame (iOS 17+) or proxy.plotAreaFrame (iOS 16)
+                                guard let plotFrame = proxy.plotFrame else { return }
+                                let frame = geometry[plotFrame]
                                 let x = value.location.x - frame.origin.x
                                 guard x >= 0, x <= frame.size.width else { return }
                                 selectedDate = proxy.value(atX: x, as: Date.self)
@@ -726,17 +722,10 @@ struct StepsChart: View, AXChartDescriptorRepresentable {
     }
 
     func makeChartDescriptor() -> AXChartDescriptor {
-        guard let first = steps.first, let last = steps.last,
-              let maxCount = steps.map(\.count).max() else {
-            return AXChartDescriptor(title: "Steps", summary: nil,
-                xAxis: AXNumericDataAxisDescriptor(title: "Date", range: 0...1, gridlinePositions: []) { "\($0)" },
-                yAxis: AXNumericDataAxisDescriptor(title: "Steps", range: 0...1, gridlinePositions: []) { "\($0)" },
-                additionalAxes: [], series: [])
-        }
         let xAxis = AXDateDataAxisDescriptor(
-            title: "Date", range: first.date...last.date, gridlinePositions: [])
+            title: "Date", range: steps.first!.date...steps.last!.date, gridlinePositions: [])
         let yAxis = AXNumericDataAxisDescriptor(
-            title: "Steps", range: 0...Double(maxCount),
+            title: "Steps", range: 0...Double(steps.map(\.count).max() ?? 0),
             gridlinePositions: []) { "\(Int($0)) steps" }
         let series = AXDataSeriesDescriptor(
             name: "Daily Steps", isContinuous: true,

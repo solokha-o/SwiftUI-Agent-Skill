@@ -32,6 +32,16 @@ Review changes as an **Agent Skills expert**, focusing on the **Agent Skills ope
 - **Modern SwiftUI APIs**: prefer modern, non-deprecated APIs where correctness is impacted (e.g., `NavigationStack`, `foregroundStyle()`).
 - **Performance guidance is optional**: performance optimizations should be phrased as “consider” unless it’s a correctness issue.
 
+## This Is a Skill, Not a Codebase
+
+Code examples in this repository are **reference patterns for AI agents**, not compilable sample code for human developers. When reviewing:
+
+- **Do not flag "incomplete" snippets.** Examples intentionally omit surrounding struct/class context, imports, and boilerplate. An AI agent understands `@StateObject private var viewModel = MyViewModel()` without needing `MyViewModel` defined.
+- **Do not request "copy-pasteable" or "self-contained" examples.** Every extra line of boilerplate burns tokens in the agent's context window. Conciseness is a feature, not a bug.
+- **Do not flag force-unwraps or missing error handling in examples.** These are pattern demonstrations, not production code. The agent will add appropriate error handling when applying the pattern to real code.
+- **Do flag genuinely incorrect syntax or misleading API usage.** If an example uses a non-existent API or wrong parameter name, that's a real issue -- the agent would produce wrong code.
+- **Do flag factual inaccuracies** (wrong iOS version requirements, incorrect deprecation claims, etc.).
+
 ## Review Focus Areas
 
 1. **Description Quality**

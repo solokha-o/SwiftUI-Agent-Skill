@@ -44,8 +44,6 @@ Hot paths are frequently executed code (scroll handlers, animations, gestures):
 **Avoid passing large "config" or "context" objects.** Pass only the specific values each view needs.
 
 ```swift
-// Given an @Observable config with theme, fontSize, notifications properties:
-
 // Good - pass specific values
 ThemeSelector(theme: config.theme)
 FontSizeSlider(fontSize: config.fontSize)
